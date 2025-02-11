@@ -1,6 +1,6 @@
 // Sample node.js web app for Pluralsight Docker CI course
 // For demonstration purposes only
-//test
+//test z  remote
 
 'use strict';
 
