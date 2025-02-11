@@ -1,0 +1,51 @@
+ls -la ~/.ssh/
+
+rw------- 1 claivent claivent 3454 Feb 11 14:23 id_rsa_github
+-rw-r--r-- 1 claivent claivent  760 Feb 11 14:23 id_rsa_github.pub
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa_github
+
+Pokud agent běží správně, výstup bude něco jako:
+
+
+Agent pid 12345
+Identity added: /home/claivent/.ssh/id_rsa_github (claivent@gmail.com)
+
+Přidání SSH konfigurace
+Vytvořte nebo upravte soubor ~/.ssh/config:
+
+
+nano ~/.ssh/config
+A přidejte tento obsah:
+
+Host github.com
+    IdentityFile ~/.ssh/id_rsa_github
+    User git
+Uložte (Ctrl + X, Y, Enter).
+
+3️⃣ Otestování připojení
+Nyní zkuste připojení k GitHubu:
+
+
+ssh -T git@github.com
+Pokud je vše správně, dostanete odpověď:
+
+
+Hi claivent! You've successfully authenticated, but GitHub does not provide shell access.
+4️⃣ Pushnutí změn
+Teď by měl push fungovat:
+
+
+git push origin dev
+Pokud stále nefunguje, zkuste resetovat SSH agent:
+
+
+ssh-add -D
+ssh-add ~/.ssh/id_rsa_github
+A zkuste znovu.
+
+
+git remote -v
+git remote set-url origin git@github.com:claivent/psweb.git
+

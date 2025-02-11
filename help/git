@@ -1,0 +1,22 @@
+Ověřte vzdálené repozitáře
+
+
+
+git remote -v
+Pokud výstup vypadá například takto:
+
+
+origin  git@github.com:claivent/repo-name.git (fetch)
+origin  git@github.com:claivent/repo-name.git (push)
+znamená to, že používáte SSH a můžete pushovat.
+
+Pokud tam místo git@github.com: vidíte https://github.com/, přepněte na SSH:
+
+
+git remote set-url origin git@github.com:claivent/repo-name.git
+
+ Pushnutí změn do GitHubu
+Pokud máte provedený commit (git commit -m "Aktualizace"), pushněte změny:
+
+
+git push origin dev
