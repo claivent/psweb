@@ -1,0 +1,19 @@
+docker run -d --name webserver -p 5005:8080 nigelpoulton/ddd-book:web0.1
+
+
+
+docker inspect nigelpoulton/ddd-book:web0.1 | grep Entrypoint -A 3
+
+
+docker run --rm -d alpine sleep 60
+
+
+docker exec -it webserver sh
+
+
+
+docker exec  webserver sh // toto nefunguje, protoze je potreba zadat -it
+
+docker exec webserver ps
+
+docker inspect webserver

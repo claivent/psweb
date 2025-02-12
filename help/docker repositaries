@@ -1,0 +1,25 @@
+nginx: https://hub.docker.com/_/nginx/
+
+busybox: https://hub.docker.com/_/busybox/
+
+redis: https://hub.docker.com/_/redis/
+
+mongo: https://hub.docker.com/_/mongo/
+
+
+
+docker pull redis:latest
+
+docker pull busybox:glibc
+
+docker pull alpine
+
+
+docker pull nigelpoulton/tu-demo:v2
+
+docker pull ghcr.io/regclient/regsync:latest
+
+docker pull node:latest
+docker inspect node:latest
+
+docker buildx imagetools inspect alpine

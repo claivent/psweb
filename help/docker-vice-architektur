@@ -1,0 +1,55 @@
+Zkontrolujte, zda váš Docker podporuje více architektur
+Docker používá Buildx a QEMU pro práci s více architekturami. Ověřte, zda jsou správně nainstalované:
+
+
+docker buildx version
+
+Pokud buildx není dostupný, spusťte:
+
+bash
+Zkopírovat
+Upravit
+docker buildx install
+A ověřte podporované architektury:
+
+bash
+Zkopírovat
+Upravit
+docker buildx ls
+Pokud nevidíte různé platformy, může být potřeba nainstalovat QEMU:
+
+bash
+Zkopírovat
+Upravit
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
+export DOCKER_CLI_EXPERIMENTAL=enabled
+
+Znovu načtěte manifest list
+
+docker manifest inspect golang | grep 'architecture\|os'
+
+docker buildx build \
+  --builder=cloud-nigelpoulton-ddd-cloud \
+  --platform=linux/amd64,linux/arm64 \
+  -t nigelpoulton/tu-demo:latest --push .
+
+  docker scout quickview nigelpoulton/tu-demo:latest
+
+  You can delete images using the docker rmi command. rmi is short for remove image.
+
+  docker rmi redis:latest af111729d35a sha256:c5b1261d...f8e1ad6b
+  Untagged: redis:latest
+  Deleted: sha256:76d5908f5e19fcdd73daf956a38826f790336ee4707d9028f32b24ad9ac72c08
+  Untagged: nigelpoulton/tu-demo:v2
+  Deleted: sha256:af111729d35a09fd24c25607ec045184bb8d76e37714dfc2d9e55d13b3ebbc67
+  Untagged: alpine:latest
+  Deleted: sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8
+
+  vymaze vsechny images
+  docker rmi $(docker images -q) -f
+
+  docker pull alpine
+  docker pull ubuntu
+
+

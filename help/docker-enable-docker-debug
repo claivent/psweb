@@ -1,0 +1,65 @@
+Protože Docker Debug Plugin není dostupný pro Docker CE na Linuxu, musíte používat běžné Docker příkazy pro diagnostiku.
+
+🛠 Ruční diagnostika Docker kontejnerů (bez debug pluginu)
+✅ 1️⃣ Ověření běžících kontejnerů
+
+docker ps -a
+📌 Tento příkaz zobrazí všechny kontejnery včetně těch, které nejsou spuštěné.
+
+✅ 2️⃣ Ověření podrobností o konkrétním kontejneru
+
+docker inspect <container_id>
+📌 Výstup zobrazí všechny detaily o kontejneru, včetně mountů, sítě a proměnných prostředí.
+
+✅ 3️⃣ Ověření logů kontejneru
+
+docker logs <container_id>
+📌 Tento příkaz zobrazí výstup aplikace běžící v kontejneru.
+
+Pro kontinuální sledování logů:
+
+
+docker logs -f <container_id>
+✅ 4️⃣ Připojení do běžícího kontejneru
+Pokud kontejner běží a chcete do něj vstoupit:
+
+
+docker exec -it <container_id> sh
+📌 Pokud kontejner používá bash, použijte:
+
+
+docker exec -it <container_id> bash
+Tím získáte shell uvnitř kontejneru.
+
+✅ 5️⃣ Ověření síťového připojení kontejneru
+Pokud chcete zjistit, jak je kontejner připojen k síti:
+
+
+docker network inspect <network_name>
+Pokud nevíte, jaké sítě existují:
+
+
+docker network ls
+✅ 6️⃣ Ověření stavových chyb a problémů s Dockerem
+
+docker system info
+📌 Tento příkaz zobrazí kompletní konfiguraci Dockeru.
+
+Pokud se vám kontejner nespustí, zkuste:
+
+
+docker start <container_id>
+docker ps -a
+Pokud vidíte stav Exited, zobrazte logy:
+
+
+docker logs <container_id>
+🚀 Shrnutí
+1️⃣ Docker Debug Plugin není dostupný na Linuxu (pouze pro Docker Desktop).
+2️⃣ Místo něj použijte klasické příkazy:
+
+docker ps -a → seznam kontejnerů
+docker logs <container_id> → logy aplikace
+docker exec -it <container_id> sh → vstup do kontejneru
+docker inspect <container_id> → podrobnosti o kontejneru
+docker network inspect <network_name> → síťové připojení
